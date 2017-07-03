@@ -37,16 +37,21 @@ componentDidMount(){
 
 searchShelf(query,maxResults){
      //this gives us promise back and sends us the books from the server
-  BooksAPI.search (query,maxResults).then(function(){
-    BooksAPI.getAll().then ((query)=>{
-  this.setState(state=>({
- 
-   books: state.books.concat ([query])
-  }))
-   })
+  BooksAPI.search(query,maxResults).then(res=>
+  
+  {console.log(res);
 
-   })
+  this.setState(books=>({
+ //then reutun object from here
+   books: state.books.concat ([books])
+
+ })
+ )
+  
 }
+   
+
+  )}
    
 
   render() {
