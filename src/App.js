@@ -4,13 +4,23 @@ import './App.css'
 import MyReads from'./MyReads'
 import Search from'./Search'
 import {Route} from 'react-router-dom'
+import escapeRegExp from 'escape-string-regexp'
 
 
 
 class BooksApp extends React.Component {
   
-  state = {
+// constructor(props) {
+//     super(props)
+//     /*// this.hideSearchPage = this.hideSearchPage.bind(this)
+//     // this.updateBook = this.updateBook.bind(this);
+//     // this.getBookById = this.getBookById.bind(this);
+//     this.searchShelf = this.searchShelf.bind(this)*/
+//   }
+
+state = {
   books :[],
+  shelf:  'currentlyReading'
   }
 //life cycle event to get data from external source
 //it's going to return it as promise so we use (.then)
@@ -22,45 +32,60 @@ componentDidMount(){
   })
 }
 
- updateShelf(book,shelf){
-     //this gives us promise back and sends us the contacts from the server
-  BooksAPI.update (book,shelf).then(books=>{
-     //then put it on state
-   this.setState(state=>({
-    //then reutun object from here
-     books: books
-     
-   }))
-
-   })
+ updateShelf=(book,shelf)=>{
+console.log (book)
+console.log (shelf)
+   this.setState({shelf: shelf})
+   if(shelf){
+      BooksAPI.update(book, shelf).then ((books)=>this.setState({
+        books:books,
+        }))
+  
    }
-
-searchShelf(query,maxResults){
-     //this gives us promise back and sends us the books from the server
-  BooksAPI.search(query,maxResults).then(res=>
   
-  {console.log(res);
+//    console.log (shelf)
+//  BooksAPI.update(book, shelf)
+//  this.setState((state)=>({
+// // //get the current state of contacts then filter (remove) where state contacts ID(c.id) not equal Id of contact that was clicked,c:single contact from contacts 
+//  book: state.books.map((b)=>b.id ==book.id)
+ 
+//  }))
 
-  this.setState(books=>({
- //then reutun object from here
-   books: state.books.concat ([books])
 
- })
- )
-  
+
 }
-   
 
-  )}
+// if(shelf){
+// BooksAPI.update(book, shelf).then(res=>{
+
+//   console.log(res)})
+
+// }
+
+
+
+searchShelf = (query, maxResults) => {
+    this.setState({query: query})
+     
+    if(query.trim() !== '') {
+      BooksAPI.search(query, maxResults).then(res => this.setState({
+        books: res
+      }))
+    } 
+  }
    
 
   render() {
-    const maxResults=15
+
+
+    const{books,onUpdateShelves}=this.props 
+   
     return (
       <div className="app">
          <Route exact path="/" render={()=>(
                    
          <MyReads  books={this.state.books}
+                   shelf={this.state.shelf}
                      onUpdateShelves={(book,shelf)=>{
                      this.updateShelf(book,shelf)}}/>
           )} />
@@ -71,7 +96,7 @@ searchShelf(query,maxResults){
                       this.searchShelf(query,maxResults)
                     }} 
                      
-                     onUpdateShelf={(book,shelf)=>{
+                  onUpdateShelf={(book,shelf)=>{
                   this.updateShelf(book,shelf)
                      history.push('/')
                      }}  /> 

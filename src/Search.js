@@ -12,19 +12,19 @@ static prpTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 onSearchShelf:PropTypes.func.isRequired,
-
+maxResults: PropTypes.number.isRequired 
     };
 
 state={
-       shelf: '' ,
-       query: ''
+      
+       query: '',
       }
-updateQuery =(query)=>{
-    this.setState({query:query.trim()},function(){
-      this.props.onSearchShelf(query)
-    })
+updateQuery =(query,maxResults)=>{
+    this.setState({query})
+    this.props.onSearchShelf(query,maxResults)
+    }
     
- }
+ 
 
    
 
@@ -35,32 +35,20 @@ updateQuery =(query)=>{
  }
 
 
-// searchBook(query,maxResults){
-//      //this gives us promise back and sends us the contacts from the server
-//   BooksAPI.search(query,maxResults).then(showingBooks=>{
-//      //then put it on state
-//    this.setState(state=>({
-//     //then reutun object from here
-//      showingBooks: state.showingBooks.concat ([showingBooks])
-     
-//    }))
-
-//    })
-//    }
 
 render(){
 
 
 //object destructuring
-const{books,onUpdateShelf,onSearchShelf}=this.props 
+const{books,onUpdateShelf,onSearchShelf,maxResults}=this.props 
 const{query} =this.state
 
 //to return the match patern
     let showingBooks
     if(query){
 
-        const match = new RegExp (escapeRegExp(query),'i')
-        showingBooks= books.filter ((book)=>match.test(book.title)|| match.test(book.authors)  )
+        let match = new RegExp (escapeRegExp(query),'i')
+        showingBooks= books.filter(book=>match.test(book.title)|| match.test(book.authors))
 
     }else {
   showingBooks=books
@@ -75,7 +63,7 @@ const{query} =this.state
                 <input type="text" 
                         placeholder="Search by title or author"
                         value= {this.state.query}
-                        onChange= {event=>this.updateQuery(event.target.value)} />
+                        onChange= {event=>this.updateQuery(event.target.value,maxResults)} />
               </div>
             </div>
           </div>
@@ -98,10 +86,10 @@ const{query} =this.state
                                 </div>
                       <div className="book-shelf-changer">
                               <select  value= {this.state.shelf}
-                                       onChange= {event=>onUpdateShelf(book,event.target.value)}>
+                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> >
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
-                                <option value="wantToRead"  >Want to Read</option>
+                                <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
                                 <option value="none">None</option>
                               </select>

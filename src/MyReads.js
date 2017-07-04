@@ -12,12 +12,13 @@ class   MyReads extends Component {
 
 static prpTypes={
 books: PropTypes.array.isRequired ,
- onUpdateShelves:PropTypes.func.isRequired
+onUpdateShelves:PropTypes.func.isRequired,
+shelf:PropTypes.string.isRequired
 //onDeleteContact:PropTypes.func.isRequired
     };
  state={
         query: '',
-        shelf: ''
+      
     }
 //  //when the state in input field changed(we write something)
 //  //then onChange: will invoke this function to apply this changes
@@ -32,10 +33,22 @@ books: PropTypes.array.isRequired ,
 
 
  render(){
+//destructuring
+const{books,onUpdateShelves,shelf}=this.props 
 
-const{books,onUpdateShelves}=this.props 
-const{shelf} =this.state
+let shelfBooks
+  
+  if(shelf){
+  if (shelf == "wantToRead" ){
 
+let match = new RegExp (escapeRegExp(shelf),'i')
+  shelfBooks=books.filter(book=>match.test(book.shelf))  
+  }
+ 
+  else{
+    shelfBooks=[]
+  }
+  }
 // //object destructuring
 // const{contacts,onDeleteContact}=this.props 
 // const{query} =this.state
@@ -143,6 +156,35 @@ const{shelf} =this.state
                           <div className="book-authors">J.K. Rowling</div>
                         </div>
                       </li>
+
+         <ol className="books-grid">
+                {shelfBooks.map((book)=>(
+                   <li key={book.id} >
+                   <div className="book">
+                    <div className="book-top">
+                     <div className="book-cover" style={{ width: 128, height: 193,
+                      backgroundImage:`url(${book.imageLinks.thumbnail})`   }}>
+                                </div>
+                      <div className="book-shelf-changer">
+                              <select  value= {this.state.shelf}
+                                       onChange= {event=>onUpdateShelves(book,event.target.value)}> >
+                                <option value="none" disabled>Move to...</option>
+                                <option value="currentlyReading" >Currently Reading</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="read">Read</option>
+                                <option value="none">None</option>
+                              </select>
+                             </div> 
+                           </div> 
+                          <div className="book-title">{book.title}</div>
+                          <div className="book-authors">{book.authors}</div>
+                       
+                      </div>
+                   </li>
+                    ))}
+      </ol>
+
+
                     </ol>
                   </div>
                 </div>
