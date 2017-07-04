@@ -39,7 +39,10 @@ console.log (shelf)
    if(shelf){
       BooksAPI.update(book, shelf).then ((books)=>this.setState({
         books:books,
-        }))
+        })).catch(function(e){
+          console.log('error',e)
+        });
+        }
   
    }
   
@@ -53,7 +56,7 @@ console.log (shelf)
 
 
 
-}
+
 
 // if(shelf){
 // BooksAPI.update(book, shelf).then(res=>{
@@ -70,7 +73,9 @@ searchShelf = (query, maxResults) => {
     if(query.trim() !== '') {
       BooksAPI.search(query, maxResults).then(res => this.setState({
         books: res
-      }))
+      })).catch(function(e){
+          console.log('error',e)
+        });
     } 
   }
    
