@@ -5,7 +5,11 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
-
+constructor (props){
+  super(props);
+  //this.state={query:''}
+ // this.onSearchShelf=this.onSearchShelf.bind(this)
+}
  
 
 static prpTypes={
@@ -16,25 +20,13 @@ maxResults: PropTypes.number.isRequired
     };
 
 state={
-      
        query: '',
-      }
-updateQuery =(query,maxResults)=>{
-    this.setState({query})
-    this.props.onSearchShelf(query,maxResults)
+       }
+ updateQuery =(query)=>{
+     this.setState({query})
+     this.props.onSearchShelf(query)
     }
     
- 
-
-   
-
- clearQuery = ()=>{
-     this.setState({query:''})
-
-
- }
-
-
 
 render(){
 
@@ -63,7 +55,7 @@ const{query} =this.state
                 <input type="text" 
                         placeholder="Search by title or author"
                         value= {this.state.query}
-                        onChange= {event=>this.updateQuery(event.target.value,maxResults)} />
+                        onChange= {event=>this.updateQuery(event.target.value)} />
               </div>
             </div>
           </div>

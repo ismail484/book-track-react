@@ -10,6 +10,12 @@ import * as MyReadsAPI from './MyReads'
 //stateless functional component -just with return function
 class   MyReads extends Component {
 
+constructor(props){
+super(props);
+
+
+}
+
 static prpTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelves:PropTypes.func.isRequired,

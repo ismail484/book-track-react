@@ -5,31 +5,36 @@ import MyReads from'./MyReads'
 import Search from'./Search'
 import {Route} from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
+import throttle from 'react-throttle-render'
 
 
 
 class BooksApp extends React.Component {
   
-// constructor(props) {
-//     super(props)
-//     /*// this.hideSearchPage = this.hideSearchPage.bind(this)
-//     // this.updateBook = this.updateBook.bind(this);
-//     // this.getBookById = this.getBookById.bind(this);
-//     this.searchShelf = this.searchShelf.bind(this)*/
-//   }
+constructor(props) {
+       super(props);
+     //  this.state={books:[]},
+      // this.state={shelf:''}  
+      this .searchShelf =this.searchShelf.bind(this)
+      
+      }
 
-state = {
-  books :[],
-  shelf:  'currentlyReading'
+  state = {
+    books :[],
+   shelf:  '',
+
   }
 //life cycle event to get data from external source
 //it's going to return it as promise so we use (.then)
 componentDidMount(){
-//this function is invoked with contacts
+//this function is invoked with books
   BooksAPI.getAll().then ((books)=>{
    console.log(books)
  this.setState({books:books})
   })
+
+
+
 }
 
  updateShelf=(book,shelf)=>{
@@ -46,38 +51,17 @@ console.log (shelf)
   
    }
   
-//    console.log (shelf)
-//  BooksAPI.update(book, shelf)
-//  this.setState((state)=>({
-// // //get the current state of contacts then filter (remove) where state contacts ID(c.id) not equal Id of contact that was clicked,c:single contact from contacts 
-//  book: state.books.map((b)=>b.id ==book.id)
- 
-//  }))
-
-
-
-
-
-// if(shelf){
-// BooksAPI.update(book, shelf).then(res=>{
-
-//   console.log(res)})
-
-// }
-
-
-
-searchShelf = (query, maxResults) => {
+searchShelf = (query) => {
     this.setState({query: query})
      
-    if(query.trim() !== '') {
-      BooksAPI.search(query, maxResults).then(res => this.setState({
-        books: res
+      if(query.trim() !== '') {
+       BooksAPI.search(query).then(res => this.setState({
+            books: res
       })).catch(function(e){
-          console.log('error',e)
-        });
-    } 
-  }
+            console.log('error',e)
+          });
+      }
+}
    
 
   render() {
@@ -97,8 +81,8 @@ searchShelf = (query, maxResults) => {
      
   <Route path="/search" render= {({history})=>(
       <Search       books={this.state.books}
-                    onSearchShelf={(query,maxResults)=>{
-                      this.searchShelf(query,maxResults)
+                    onSearchShelf={(query)=>{
+                      this.searchShelf(query)
                     }} 
                      
                   onUpdateShelf={(book,shelf)=>{
