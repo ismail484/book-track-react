@@ -2,7 +2,7 @@ import React ,{Component} from 'react'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
+
 
 class Search extends Component {
 constructor (props){
@@ -16,23 +16,28 @@ static prpTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 onSearchShelf:PropTypes.func.isRequired,
-maxResults: PropTypes.number.isRequired 
+shelf:PropTypes.string.isRequired
+
     };
 
 state={
        query: '',
+       //shelf:''
        }
  updateQuery =(query)=>{
      this.setState({query})
      this.props.onSearchShelf(query)
     }
     
+    // updateBookShelf =(book,shelf)=>{
+    //  this.setState({shelf})
+    //  this.props.onUpdateShelf(book,shelf)
+    // }
 
 render(){
 
-
 //object destructuring
-const{books,onUpdateShelf,onSearchShelf,maxResults}=this.props 
+const{books,onUpdateShelf,onSearchShelf,shelf}=this.props 
 const{query} =this.state
 
 //to return the match patern
@@ -40,13 +45,13 @@ const{query} =this.state
     if(query){
 
         let match = new RegExp (escapeRegExp(query),'i')
-        showingBooks= books.filter(book=>match.test(book.title)|| match.test(book.authors))
+        showingBooks= books.filter(book=>match.test(book.title)|| match.test(book.authors)&& book.imageLinks&& book.authors&&book.title&&book.id)
 
     }else {
   showingBooks=books
     }
   return(
-
+   
 <div className="list-books" >
  <div className="search-books">
             <div className="search-books-bar">
@@ -74,11 +79,11 @@ const{query} =this.state
                    <div className="book">
                     <div className="book-top">
                      <div className="book-cover" style={{ width: 128, height: 193,
-                      backgroundImage:`url(${book.imageLinks.thumbnail})`   }}>
+                      backgroundImage:`url(${book.imageLinks})`   }}>
                                 </div>
                       <div className="book-shelf-changer">
-                              <select  value= {this.state.shelf}
-                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> >
+                              <select selected value= {this.state.shelf} 
+                                       onChange= {event=>this.onUpdateShelf(book,event.target.value)}> 
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -91,8 +96,9 @@ const{query} =this.state
                           <div className="book-authors">{book.authors}</div>
                        
                       </div>
+                   
                    </li>
-                    ))}
+                      ))}
       </ol>
    
             
