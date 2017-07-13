@@ -149,7 +149,11 @@ var shelf=['none','wantToRead','read','currentlyReading']
                      
                   onUpdateShelf={(book,shelf)=>{
                   this.updateShelf(book,shelf)
-                  history.push('/')}} /> 
+                   history.push('/')
+                  }
+                
+              
+                   } /> 
     )} />
                 
    </div>

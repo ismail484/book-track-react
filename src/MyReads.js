@@ -4,6 +4,7 @@ import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import * as MyReadsAPI from './MyReads'
+import StarRatingComponent from 'react-star-rating-component';
 
 
 
@@ -13,8 +14,15 @@ class   MyReads extends Component {
 constructor(props){
 super(props);
 
+this.state = {
+            rating: 1
+        };
 
 }
+
+onStarClick(nextValue, prevValue, name) {
+        this.setState({rating: nextValue});
+    }
 
 static prpTypes={
 books: PropTypes.array.isRequired ,
@@ -51,6 +59,8 @@ title:PropTypes.string.isRequired,
 //destructuring
 const{books,onUpdateShelf,shelf,title}=this.props 
 
+const { rating } = this.state;
+
  return(
          
               <div>
@@ -64,10 +74,10 @@ const{books,onUpdateShelf,shelf,title}=this.props
                    <div className="book">
                     <div className="book-top">
                      <div className="book-cover" style={{ width: 128, height: 193,
-                      backgroundImage:`url(${book.imageLinks})`   }}>
+                      backgroundImage:`url(${book.imageLinks.thumbnail || book.imageLinks })`   }}>
                                 </div>
                       <div className="book-shelf-changer">
-                              <select  value= {this.state.shelf} selected
+                              <select  value= {book.shelf} selected
                                        onChange= {event=>onUpdateShelf(book,event.target.value)}> 
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
@@ -79,7 +89,17 @@ const{books,onUpdateShelf,shelf,title}=this.props
                            </div> 
                           <div className="book-title">{book.title}</div>
                           <div className="book-authors">{book.authors}</div>
-                       
+                          <div  className="book-rate" >
+                           <StarRatingComponent 
+                    name={book.id}
+                    starCount={5}
+                    value={book.averageRating}
+                    onStarClick={this.onStarClick.bind(this)}
+                />
+                          
+                           
+                          </div>
+                     
                       </div>
                    </li>
                     ))}
