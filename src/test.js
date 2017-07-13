@@ -1,112 +1,167 @@
-import React ,{Component} from 'react'
-import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import {Link} from 'react-router-dom'
+import React, { Component} from 'react'
 import * as BooksAPI from './BooksAPI'
-import * as MyReadsAPI from './MyReads'
+import './App.css'
+import MyReads from'./MyReads'
+import Search from'./Search'
+import {Route} from 'react-router-dom'
+import escapeRegExp from 'escape-string-regexp'
+import throttle from 'react-throttle-render'
 
 
 
-//stateless functional component -just with return function
-class   MyReads extends Component {
+class BooksApp extends React.Component {
+  
+constructor(props) {
+       super(props);
+     //  this.state={books:[]},
+      // this.state={shelf:''} 
+      this.state={selectedShelf:'none',books:[]} 
+      this .searchShelf =this.searchShelf.bind(this)
+      this.updateShelf=this.updateShelf.bind(this)
+      
+      }
 
-constructor(props){
-super(props);
+
+
+  state = {
+    books :[],
+    selectedShelf: '',
+
+  }
+//life cycle event to get data from external source
+//it's going to return it as promise so we use (.then)
+componentDidMount(){
+//this function is invoked with books
+  BooksAPI.getAll().then ((books)=>{
+  console.log(books)
+ this.setState({books:books})
+  })
 
 
 }
 
-static prpTypes={
-books: PropTypes.array.isRequired ,
-onUpdateShelf:PropTypes.func.isRequired,
-shelf:PropTypes.string.isRequired,
-title:PropTypes.string.isRequired,
-//shelf:PropTypes.string.isRequired
-//onDeleteContact:PropTypes.func.isRequired
-    };
- state={
-        query: '',
-      
+
+updateShelf=(book,shelf)=>{
+//console.log (book)
+  this.setState({selectedShelf: shelf})
+   if(book.shelf!== shelf){
+      book.shelf = shelf
+     BooksAPI.update(book, shelf).then((res)=>
+     { this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))}
+     )
+    // book.shelf=shelf
+      }else{
+      book=book
+      }
+console.log(book)
+ } 
+  
+  
+searchShelf = (query) => {
+    this.setState({query: query})
+     
+      if(query.trim() !== '') {
+        
+       BooksAPI.search(query).then(
+         res=>{if (res && res.length) {this.setState({ books: res })
+       }
+  
     }
 
+).catch(function(e){
+            console.log('error',e)
+          });
+      }
+}
+   
 
+  render() {
 
-    // updatequery =(shelf)=>{
-    //  this.setState({shelf})
-    //  this.props.onUpdateShelves(shelf)
-    // }
-//  //when the state in input field changed(we write something)
-//  //then onChange: will invoke this function to apply this changes
-//  updateQuery =(query)=>{
-//     this.setState({query:query.trim()})
-//  }
+var shelf=['none','wantToRead','read','currentlyReading']
 
-//  clearQuery = ()=>{
-//      this.setState({query:''})
+  
+   
+  return (
+      <div className="app">
 
-//  }
-
-
- render(){
-//destructuring
-const{books,onUpdateShelf,shelf,title}=this.props 
-
- return(
-          <div className="list-books">
+   <Route exact path="/" render={()=>(
+<div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">{title}</h2>
-                  <div className="bookshelf-books">
 
-                  <ol className="books-grid">
-                {books.map((book)=>(
-                   <li key={book.id} >
-                   <div className="book">
-                    <div className="book-top">
-                     <div className="book-cover" style={{ width: 128, height: 193,
-                      backgroundImage:`url(${book.imageLinks})`   }}>
-                                </div>
-                      <div className="book-shelf-changer">
-                              <select  value= {this.state.shelf} selected
-                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> 
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading" >Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                             </div> 
-                           </div> 
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors}</div>
-                       
-                      </div>
-                   </li>
-                    ))}
-              </ol>
+      
+         <Route exact path="/" render={()=>(
+
                    
-                  </div>
-                </div>
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='read')}
+                   shelf={this.state.selectedShelf}
+                   title='Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+                  
+
+
+                  
+                  />
+          
+          
+          )} />
+          <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='wantToRead')}
+                   shelf={this.state.selectedShelf}
+                   title='Want to Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+                  
+                  />
+          
+          
+          )} />
+     <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='currentlyReading')}
+                   shelf={this.state.selectedShelf}
+                   title='Currently Reading'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+            />  
+                )} 
+          
+                   />
+
+
+      </div>
+            </div>
+ )} />
+
+
+
+               
+  <Route path="/search" render= {({history})=>(
+      <Search       books={this.state.books.filter(book=>book.shelf==='none')}
+                    shelf={this.state.selectedShelf}
+                    onSearchShelf={(query)=>{
+                      this.searchShelf(query)
+                    }} 
+                     
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)
+                   history.push('/')
+                  }
                 
-              </div>
-            </div>
-            <div className="open-search">
-              <Link to="/search" >Add a book</Link>
-            </div>
-          </div>
-
-)
-
- }
+              
+                   } /> 
+    )} />
+                
+   </div>
+    )
+  }
 }
 
 
 
 
-
-
-export default MyReads
+export default BooksApp

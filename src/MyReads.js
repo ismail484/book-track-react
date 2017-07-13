@@ -73,9 +73,11 @@ const { rating } = this.state;
                    <li key={book.id} >
                    <div className="book">
                     <div className="book-top">
+
+                    {book.imageLinks &&(
                      <div className="book-cover" style={{ width: 128, height: 193,
-                      backgroundImage:`url(${book.imageLinks.thumbnail || book.imageLinks })`   }}>
-                                </div>
+                      backgroundImage:`url(${book.imageLinks.thumbnail })`   }}>
+                    </div> ) }
                       <div className="book-shelf-changer">
                               <select  value= {book.shelf} selected
                                        onChange= {event=>onUpdateShelf(book,event.target.value)}> 

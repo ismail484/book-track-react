@@ -140,7 +140,7 @@ var shelf=['none','wantToRead','read','currentlyReading']
 
 
                
-  <Route path="/search" render= {({history})=>(
+  <Route path="/search" render= {()=>(
       <Search       books={this.state.books.filter(book=>book.shelf==='none')}
                     shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{
@@ -149,7 +149,6 @@ var shelf=['none','wantToRead','read','currentlyReading']
                      
                   onUpdateShelf={(book,shelf)=>{
                   this.updateShelf(book,shelf)
-                   history.push('/')
                   }
                 
               
