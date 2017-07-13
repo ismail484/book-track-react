@@ -12,7 +12,7 @@ constructor (props){
 }
  
 
-static prpTypes={
+static propTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 onSearchShelf:PropTypes.func.isRequired,
@@ -82,8 +82,8 @@ const{query} =this.state
                       backgroundImage:`url(${book.imageLinks})`   }}>
                                 </div>
                       <div className="book-shelf-changer">
-                              <select selected value= {this.state.shelf} 
-                                       onChange= {event=>this.onUpdateShelf(book,event.target.value)}> 
+                              <select  value= {this.state.shelf} selected
+                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> 
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

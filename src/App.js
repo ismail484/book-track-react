@@ -14,14 +14,19 @@ class BooksApp extends React.Component {
 constructor(props) {
        super(props);
      //  this.state={books:[]},
-      // this.state={shelf:''}  
+      // this.state={shelf:''} 
+      this.state={selectedShelf:'none',books:[]} 
       this .searchShelf =this.searchShelf.bind(this)
       this.updateShelf=this.updateShelf.bind(this)
+      
       }
+
+
 
   state = {
     books :[],
-    Shelf: ''
+    selectedShelf: '',
+
   }
 //life cycle event to get data from external source
 //it's going to return it as promise so we use (.then)
@@ -38,22 +43,18 @@ componentDidMount(){
 
 updateShelf=(book,shelf)=>{
 //console.log (book)
-  this.setState({shelf: shelf})
-  if (shelf){
-    BooksAPI.update(book, shelf).then(books=>this.setState({books:books})).catch(function(e){
-            console.log('error',e)
-          });
-  
+  this.setState({selectedShelf: shelf})
    if(book.shelf!== shelf){
       book.shelf = shelf
      BooksAPI.update(book, shelf).then((res)=>
      { this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))}
      )
     // book.shelf=shelf
+      }else{
+      book=book
       }
- }
-
-}
+console.log(book)
+ } 
   
   
 searchShelf = (query) => {
@@ -76,29 +77,81 @@ searchShelf = (query) => {
 
   render() {
 
+var shelf=['none','wantToRead','read','currentlyReading']
 
-    const{books,onUpdateShelves}=this.props 
+  
    
-    return (
+  return (
       <div className="app">
+
+   <Route exact path="/" render={()=>(
+<div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+            <div className="list-books-content">
+
+      
          <Route exact path="/" render={()=>(
+
                    
-         <MyReads  books={this.state.books}
-                   shelf={this.state.shelf}
-                  onUpdateShelves={(book,shelf)=>{
-                  this.updateShelf(book,shelf)}}/>
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='read')}
+                   shelf={this.state.selectedShelf}
+                   title='Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+                  
+
+
+                  
+                  />
+          
+          
           )} />
-     
+          <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='wantToRead')}
+                   shelf={this.state.selectedShelf}
+                   title='Want to Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+                  
+                  />
+          
+          
+          )} />
+     <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='currentlyReading')}
+                   shelf={this.state.selectedShelf}
+                   title='Currently Reading'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}}
+            />  
+                )} 
+          
+                   />
+
+
+      </div>
+            </div>
+ )} />
+
+
+
+               
   <Route path="/search" render= {({history})=>(
-      <Search       books={this.state.books}
-                    shelf={this.state.books}
+      <Search       books={this.state.books.filter(book=>book.shelf==='none')}
+                    shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{
                       this.searchShelf(query)
                     }} 
                      
-                  onUpdateShelf={(book,shelf)=>{this.updateShelf(book,shelf)}} /> 
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)
+                  history.push('/')}} /> 
     )} />
-         
+                
    </div>
     )
   }
