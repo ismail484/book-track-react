@@ -2,6 +2,7 @@ import React ,{Component} from 'react'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 
 class Search extends Component {
@@ -18,11 +19,15 @@ state={
        query: '',
        }
 
-//update query string function
- updateQuery =(query)=>{
+// //update query string function
+  updateQuery =(query)=>{
      this.setState({query})
-     this.props.onSearchShelf(query)
+      this.props.onSearchShelf(query)
     }
+
+
+
+
 
 render(){
 

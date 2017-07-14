@@ -10,26 +10,27 @@ import StarRatingComponent from 'react-star-rating-component';
 
 class  MyReads extends Component {
 
-constructor(props){
-super(props);
-this.state = {
-            rating: 1 };
+// constructor(props){
+// super(props);
+// this.state = {
+//             rating: 1 };
             
-        }//end of constructor
+//         }//end of constructor
 
 //just for input rating (but not modified on server side)
 onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
                                         }
 
-static prpTypes={
+static propTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 shelf:PropTypes.string.isRequired,
 title:PropTypes.string.isRequired,
                               };
  state={
-        query: ''
+        query: '' ,
+        rating: 1
     }
 
 

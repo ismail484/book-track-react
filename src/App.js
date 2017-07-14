@@ -5,23 +5,15 @@ import MyReads from'./MyReads'
 import Search from'./Search'
 import {Route} from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
-import throttle from 'react-throttle-render'
+
 
 
 
 class BooksApp extends React.Component {
   
-constructor(props) {
-       super(props);
-      this.state={selectedShelf:'none',books:[],currBooks:[]} 
-      this .searchShelf =this.searchShelf.bind(this)
-      this.updateShelf=this.updateShelf.bind(this)
-    
-      }
   state = {
     books :[],
-    currBooks:[],
-    selectedShelf: '',
+    selectedShelf: 'none',
   }
 //life cycle event to get data from external source
 //it's going to return it as promise so we use (.then)
@@ -48,9 +40,9 @@ updateShelf=(book,shelf)=>{
 console.log(book)
  } 
    
-   //search for requered book
+//search for requered book
 searchShelf = (query) => {
-    this.setState({query: query})
+    this.setState({query:query})
      
       if(query.trim() !== '') {
         
@@ -62,7 +54,7 @@ searchShelf = (query) => {
           });
        }//end of if condition
   
-    }//end of search function
+    }//end of search function   
 
 
 render() {
@@ -122,7 +114,7 @@ var selectedShelf=['none','wantToRead','read','currentlyReading']
       <Search       books={this.state.books.filter(book=>book.shelf==='none')}
                     shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{
-                      this.searchShelf(query)  }}   
+                      this.searchShelf(query)  }} 
                   onUpdateShelf={(book,shelf)=>{
                   this.updateShelf(book,shelf)}}  />
 
