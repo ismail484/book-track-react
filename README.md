@@ -9,7 +9,7 @@
 
 # How to Run Project 
    1.  Download all Project files
-   2.  Run file index.html
+   2.  Run file index.html,
 
 # Extra Credit Description
   
