@@ -12,7 +12,7 @@
 
 # How to Run Project 
    1.  Download all Project files
-   2.  Run `yarn install` [yran](https://yarnpkg.com/en/) is preferred package for ReactJs or `npm install` to install all required dependancies &packages .
+   2.  Run `yarn install` [yarn](https://yarnpkg.com/en/) is preferred package for ReactJs or `npm install` to install all required dependancies &packages .
    3.  Run `yarn start`  or `npm start` 
    3.  open browser [MyReads App](http://localhost:3000/)
    4.  Use the serach terms which are in `SEARCH_TERMS.md`
