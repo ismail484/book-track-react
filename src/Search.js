@@ -7,8 +7,6 @@ import {Link} from 'react-router-dom'
 class Search extends Component {
 constructor (props){
   super(props);
-  //this.state={query:''}
- // this.onSearchShelf=this.onSearchShelf.bind(this)
 }
  
 
@@ -22,17 +20,13 @@ shelf:PropTypes.string.isRequired
 
 state={
        query: '',
-       //shelf:''
        }
  updateQuery =(query)=>{
      this.setState({query})
      this.props.onSearchShelf(query)
     }
     
-    // updateBookShelf =(book,shelf)=>{
-    //  this.setState({shelf})
-    //  this.props.onUpdateShelf(book,shelf)
-    // }
+    
 
 render(){
 
@@ -64,12 +58,6 @@ const{query} =this.state
               </div>
             </div>
           </div>
- {showingBooks.length !== books.length &&(
-<div >  
-<span> Now Showing {showingBooks.length} of {showingBooks.length} total  </span>   
-    </div>
-    )}
-
 
 
             <div className="search-books-results">
@@ -106,9 +94,9 @@ const{query} =this.state
           </div>
    </div>
 
-  )
-}
-}
+  )//end of return
+}//end of render
+}//end of class
 
 
 export default Search

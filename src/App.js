@@ -18,7 +18,7 @@ constructor(props) {
       this.state={selectedShelf:'none',books:[]} 
       this .searchShelf =this.searchShelf.bind(this)
       this.updateShelf=this.updateShelf.bind(this)
-      
+    //  this.currBooks= ''
       }
 
 
@@ -61,6 +61,10 @@ searchShelf = (query) => {
     this.setState({query: query})
      
       if(query.trim() !== '') {
+
+    // if (query in currBooks){
+
+    // }else{
         
        BooksAPI.search(query).then(
          res=>{if (res && res.length) {this.setState({ books: res })
@@ -71,14 +75,15 @@ searchShelf = (query) => {
 ).catch(function(e){
             console.log('error',e)
           });
+     // }
       }
 }
    
 
   render() {
 
-var shelf=['none','wantToRead','read','currentlyReading']
-
+var selectedShelf=['none','wantToRead','read','currentlyReading']
+//const currBooks= this.state.books
   
    
   return (

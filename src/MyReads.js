@@ -29,30 +29,12 @@ books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 shelf:PropTypes.string.isRequired,
 title:PropTypes.string.isRequired,
-//shelf:PropTypes.string.isRequired
-//onDeleteContact:PropTypes.func.isRequired
+
     };
  state={
         query: '',
       
     }
-
-
-
-    // updatequery =(shelf)=>{
-    //  this.setState({shelf})
-    //  this.props.onUpdateShelves(shelf)
-    // }
-//  //when the state in input field changed(we write something)
-//  //then onChange: will invoke this function to apply this changes
-//  updateQuery =(query)=>{
-//     this.setState({query:query.trim()})
-//  }
-
-//  clearQuery = ()=>{
-//      this.setState({query:''})
-
-//  }
 
 
  render(){
@@ -104,7 +86,9 @@ const { rating } = this.state;
                      
                       </div>
                    </li>
-                    ))}
+                    )//end of map Array
+                    )//end of JSX expression
+                } 
               </ol>
                    
                   </div>
@@ -116,10 +100,10 @@ const { rating } = this.state;
             </div>
           </div>
 
-)
+)//end of return
 
- }
-}
+ }//end of render
+}//end of class
 
 
 
