@@ -5,7 +5,10 @@
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
 # Required Libraries and Dependencies
-   - React ,React Router, React webpack
+   - Create React App : run `npm install -g create-react-app`
+   - React Regular Expression : run `npm install --save escape-string-regexp`
+   - React Router : run `npm install --save react-router-dom`
+   - React Rating : run `npm install --save react-star-rating-component`
 
 # How to Run Project 
    1.  Download all Project files
