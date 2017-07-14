@@ -16,9 +16,6 @@
    3.  Run `yarn start`  or `npm start` 
    3.  open browser [MyReads App](http://localhost:3000/)
    4.  Use the serach terms which are in `SEARCH_TERMS.md`
-    
-# Extra Credit Description
-  
  
 # Miscellaneous
   - Simply it's working as a single page application.
