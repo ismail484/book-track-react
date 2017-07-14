@@ -23,9 +23,9 @@
 
 # Resources
  
-    1. [React Library](https://facebook.github.io/react/)
-    2. [Create React App](https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html)
-    3. [Create React updates-Webpack2](https://facebook.github.io/react/blog/2017/05/18/whats-new-in-create-react-app.html)
-    4. [React Form and select element](https://facebook.github.io/react/docs/forms.html)
-    5. [Short-circuit evaluation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Short-circuit_evaluation)
+   1. [React Library](https://facebook.github.io/react/)
+   2. [Create React App](https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html)
+   3. [Create React updates-Webpack2](https://facebook.github.io/react/blog/2017/05/18/whats-new-in-create-react-app.html)
+   4. [React Form and select element](https://facebook.github.io/react/docs/forms.html)
+   5. [Short-circuit evaluation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Short-circuit_evaluation)
     6. [React Router v4](https://tylermcginnis.com/build-your-own-react-router-v4/)
