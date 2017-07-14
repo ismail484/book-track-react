@@ -22,7 +22,7 @@
  
 # Miscellaneous
   - Simply it's working as a single page application.
-  - It's provided with API promises to update on backend ( Udacity server) .
+  - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
 
 # Resources
  
