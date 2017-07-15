@@ -60,8 +60,8 @@ const{query} =this.state
 
     <div className="search-books-results">
         <ol className="books-grid">
-            {showingBooks.map((book)=>(
-            <li key={book.id}>
+            {showingBooks.map((book,id)=>(
+            <li key={id}>
                 <div className="book">
                     <div className="book-top">
                         {book.imageLinks &&(

@@ -8,30 +8,9 @@ import StarRatingComponent from 'react-star-rating-component';
 
 
 
-class  MyReads extends Component {
+class  Book extends Component {
 
-// constructor(props){
-// super(props);
-// this.state = {
-//             rating: 1 };
-            
-//         }//end of constructor
 
-//just for input rating (but not modified on server side)
-onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
-                                        }
-
-static propTypes={
-books: PropTypes.array.isRequired ,
-onUpdateShelf:PropTypes.func.isRequired,
-shelf:PropTypes.string.isRequired,
-title:PropTypes.string.isRequired,
-                              };
- state={
-        query: '' ,
-        rating: 1
-    }
 
 
  render(){
@@ -41,14 +20,7 @@ const { rating } = this.state;
 
  return(
          
- <div>
-    <div className="bookshelf">
-        <h2 className="bookshelf-title">{title}</h2>
-        <div className="bookshelf-books">
 
-            <ol className="books-grid">
-                {books.map((book,id)=>(
-                <li key={id}>
                     <div className="book">
                         <div className="book-top">
 
@@ -71,30 +43,17 @@ const { rating } = this.state;
                           <div className="book-authors">{book.authors}</div>
                           <div  className="book-rate" >
                            <StarRatingComponent 
-                    name={book.id}
-                    starCount={5}
-                    value={book.averageRating}
-                    onStarClick={this.onStarClick.bind(this)}
-                />
+                                               name={book.id}
+                                               starCount={5}
+                                               value={book.averageRating}
+                                               onStarClick={this.onStarClick.bind(this)}
+                                                  />
                           
                            
                           </div>
                      
                       </div>
-                   </li>
-                    )//end of map Array
-                    )//end of JSX expression
-                } 
-              </ol>
-                   
-                  </div>
-                </div>
-                
-             
-            <div className="open-search">
-              <Link to="/search" >Add a book</Link>
-            </div>
-          </div>
+                  
 
 )//end of return
 
@@ -106,4 +65,4 @@ const { rating } = this.state;
 
 
 
-export default MyReads
+export default Book
