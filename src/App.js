@@ -5,6 +5,7 @@ import MyReads from'./MyReads'
 import Search from'./Search'
 import {Route} from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
+import BookShelf from'./BookShelf'
 
 
 
@@ -66,47 +67,11 @@ var selectedShelf=['none','wantToRead','read','currentlyReading']
       <div className="app">
 
    <Route exact path="/" render={()=>(
-<div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-
       
-         <Route exact path="/" render={()=>(
-
-                   
-         <MyReads  books={this.state.books.filter(book=>book.shelf==='read')}
-                   shelf={this.state.selectedShelf}
-                   title='Read'
-                  onUpdateShelf={(book,shelf)=>{
-                  this.updateShelf(book,shelf)}} />
-          
-                                              )} /> 
-
-        <Route exact path="/" render={()=>(
-                   
-         <MyReads  books={this.state.books.filter(book=>book.shelf==='wantToRead')}
-                   shelf={this.state.selectedShelf}
-                   title='Want to Read'
-                  onUpdateShelf={(book,shelf)=>{
-                  this.updateShelf(book,shelf)}} />
-          
-                                          )} />
-
-                                          
-     <Route exact path="/" render={()=>(
-                   
-         <MyReads  books={this.state.books.filter(book=>book.shelf==='currentlyReading')}
-                   shelf={this.state.selectedShelf}
-                   title='Currently Reading'
-                  onUpdateShelf={(book,shelf)=>{
-                  this.updateShelf(book,shelf)}} />  
-                
-                                          )} />
-
-            </div>
-         </div>
+    <BookShelf    books={this.state.books} 
+                  onUpdateShelf={this.updateShelf} 
+                   selectedShelf={this.state.selectedShelf}  />
+           
          //end of the route (\) which include three component
                                  )} /> 
                
