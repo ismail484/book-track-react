@@ -5,17 +5,10 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import * as MyReadsAPI from './MyReads'
 import StarRatingComponent from 'react-star-rating-component';
-
+import Book from'./Book'
 
 
 class  MyReads extends Component {
-
-// constructor(props){
-// super(props);
-// this.state = {
-//             rating: 1 };
-            
-//         }//end of constructor
 
 //just for input rating (but not modified on server side)
 onStarClick(nextValue, prevValue, name) {
@@ -38,6 +31,7 @@ title:PropTypes.string.isRequired,
 //destructuring
 const{books,onUpdateShelf,shelf,title}=this.props 
 const { rating } = this.state;
+let mappedBooks
 
  return(
          
@@ -47,40 +41,16 @@ const { rating } = this.state;
         <div className="bookshelf-books">
 
             <ol className="books-grid">
-                {books.map((book,id)=>(
+                {  mappedBooks = books.map((book,id)=>(
                 <li key={id}>
-                    <div className="book">
-                        <div className="book-top">
+               return <Book book={book} onUpdateShelf={this.onUpdateShelf} shelf={this.shelf} />
+        })
 
-                    {book.imageLinks &&(
-                     <div className="book-cover" style={{ width: 128, height: 193,
-                      backgroundImage:`url(${book.imageLinks.thumbnail })`   }}>
-                                 </div> ) }
-                      <div className="book-shelf-changer">
-                              <select  value= {book.shelf} selected
-                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> 
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading" >Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                             </div> 
-                           </div> 
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors}</div>
-                          <div  className="book-rate" >
-                           <StarRatingComponent 
-                    name={book.id}
-                    starCount={5}
-                    value={book.averageRating}
-                    onStarClick={this.onStarClick.bind(this)}
-                />
-                          
-                           
-                          </div>
-                     
-                      </div>
+        return (
+            {mappedBooks}
+        )
+
+
                    </li>
                     )//end of map Array
                     )//end of JSX expression
