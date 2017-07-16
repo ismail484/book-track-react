@@ -14,8 +14,14 @@ static propTypes={
 book: PropTypes.object.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 shelf:PropTypes.string.isRequired,
-title:PropTypes.string.isRequired,
+
                               };
+
+state={rating: 1}
+
+onStarClick(nextValue, prevValue, name) {
+        this.setState({rating: nextValue});
+                                        }
 
 
  render(){

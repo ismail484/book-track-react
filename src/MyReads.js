@@ -11,9 +11,7 @@ import Book from'./Book'
 class  MyReads extends Component {
 
 //just for input rating (but not modified on server side)
-onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
-                                        }
+
 
 static propTypes={
 books: PropTypes.array.isRequired ,
@@ -23,7 +21,6 @@ title:PropTypes.string.isRequired,
                               };
  state={
         query: '' ,
-        rating: 1
     }
 
 
@@ -31,7 +28,7 @@ title:PropTypes.string.isRequired,
 //destructuring
 const{books,onUpdateShelf,shelf,title}=this.props 
 const { rating } = this.state;
-let mappedBooks
+
 
  return(
          
@@ -41,16 +38,9 @@ let mappedBooks
         <div className="bookshelf-books">
 
             <ol className="books-grid">
-                {  mappedBooks = books.map((book,id)=>(
-                <li key={id}>
-               return <Book book={book} onUpdateShelf={this.onUpdateShelf} shelf={this.shelf} />
-        })
-
-        return (
-            {mappedBooks}
-        )
-
-
+                {   books.map((book,id)=>(
+                 <li key={id}>
+                <Book book={book} onUpdateShelf={onUpdateShelf} shelf={shelf} />
                    </li>
                     )//end of map Array
                     )//end of JSX expression
