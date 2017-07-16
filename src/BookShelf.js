@@ -8,7 +8,7 @@ import escapeRegExp from 'escape-string-regexp'
 
 
 
-class BooksApp extends React.Component {
+class BookShelf extends React.Component {
 
 
 
@@ -27,4 +27,4 @@ return()
 
 
 
-    export default BooksApp
+    export default BookShelf
