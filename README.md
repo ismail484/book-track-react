@@ -4,11 +4,10 @@
    
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
-$.tree-md
+$.tree-md .
 #Project tree
 
 .
-
  * [tree-md](./tree-md)
  * [APP.js](./APP.js)
    * [BookShelf.js](./APP.js/BookShelf.js)
