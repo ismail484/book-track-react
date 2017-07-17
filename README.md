@@ -4,40 +4,22 @@
    
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
+  #### How  components do interact with each other:
+
 ```
-project
-│   README.md
-│   file001.txt    
+APP.js
+│     
 │
-└───folder1
-│   │   file011.txt
-│   │   file012.txt
-│   │
-│   └───subfolder1
-│       │   file111.txt
-│       │   file112.txt
-│       │   ...
-│   
-└───folder2
-    │   file021.txt
-    │   file022.txt
+└───BookShelf
+│   │  
+│   └─── MyReads.js
+│       
+└───Search.js 
+    │
+    └───  Book.js
+
 ```
 
-
-
-$.tree-md .
-#Project tree
-
-.
- * [tree-md](./tree-md)
- * [APP.js](./APP.js)
-   * [BookShelf.js](./APP.js/BookShelf.js)
-   * [Search.js](./APP.js/Search.js)
- * [BookShelf.js](./APP.js/bookShelf.js)
-   * [MyReads.js](./APP.js/BookShelf.js/MyReads.js)
- * [Search.js](./APP.js/Search.js)
-   * [Book.js](./APP.js/Search.js/Book.js)
-  
 
 # Required Libraries and Dependencies
    - Create React App : run `npm install -g create-react-app`
