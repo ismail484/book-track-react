@@ -4,6 +4,23 @@
    
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
+  #### How  components do interact with each other:
+
+```
+APP.js
+│     
+│
+└───BookShelf
+│   │  
+│   └─── MyReads.js
+│       
+└───Search.js 
+    │
+    └───  Book.js
+
+```
+
+
 # Required Libraries and Dependencies
    - Create React App : run `npm install -g create-react-app`
    - React Regular Expression : run `npm install --save escape-string-regexp`
@@ -20,6 +37,8 @@
 # Miscellaneous
   - Simply it's working as a single page application.
   - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
+
+
 
 # Resources
  
