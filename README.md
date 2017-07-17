@@ -2,6 +2,7 @@
 
 # Description
    
+  - Simply ,It acts as a single page application 
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
   #### How  components do interact with each other:
