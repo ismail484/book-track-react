@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import './App.css'
 import MyReads from'./MyReads'
+import PropTypes from 'prop-types'
 
 
 
@@ -8,6 +9,7 @@ import MyReads from'./MyReads'
 class BookShelf extends React.Component {
 
 static propTypes={
+
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 selectedShelf:PropTypes.string.isRequired,

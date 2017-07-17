@@ -26,15 +26,12 @@ onStarClick(nextValue, prevValue, name) {
 
  render(){
 //destructuring
-const{books,onUpdateShelf,shelf,title,book}=this.props 
+const{onUpdateShelf,shelf,book}=this.props 
 const { rating } = this.state;
 
  return(
-         
-
-                    <div className="book">
-                        <div className="book-top">
-
+             <div className="book">
+                <div className="book-top">
                     {book.imageLinks &&(
                      <div className="book-cover" style={{ width: 128, height: 193,
                       backgroundImage:`url(${book.imageLinks.thumbnail })`   }}>
@@ -59,8 +56,7 @@ const { rating } = this.state;
                                                value={book.averageRating}
                                                onStarClick={this.onStarClick.bind(this)}
                                                   />
-                          
-                           
+                            
                           </div>
                      
                       </div>
