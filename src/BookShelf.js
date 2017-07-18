@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 
 
-class BookShelf extends React.Component {
+class BookShelf extends Component {
 
 static propTypes={
 

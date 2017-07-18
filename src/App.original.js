@@ -1,9 +1,10 @@
 import React, { Component} from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import MyReads from'./MyReads'
 import Search from'./Search'
 import {Route} from 'react-router-dom'
-import BookShelf from'./BookShelf'
+import escapeRegExp from 'escape-string-regexp'
 
 
 
@@ -20,7 +21,7 @@ componentDidMount(){
 //this function is invoked with books
   BooksAPI.getAll().then ((books)=>{
   console.log(books)
- this.setState({books:books})
+ this.setState({books:books,currBooks:books})
   })
 }
 
@@ -31,16 +32,12 @@ updateShelf=(book,shelf)=>{
    if(book.shelf!== shelf){
       book.shelf = shelf
      BooksAPI.update(book, shelf).then((res)=>
-     
-     { this.setState((state,props) => { books: state.books.filter(b => b.id !== book.id).concat([ book ]) })}
-
-     // { this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))}
+     { this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))}
      )
       }else{
       book=book
       }
 console.log(book)
-console.log(this.state.books)
  } 
    
 //search for requered book
@@ -69,11 +66,47 @@ var selectedShelf=['none','wantToRead','read','currentlyReading']
       <div className="app">
 
    <Route exact path="/" render={()=>(
+<div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+            <div className="list-books-content">
+
       
-    <BookShelf    books={this.state.books} 
-                  onUpdateShelf={this.updateShelf} 
-                   selectedShelf={this.state.selectedShelf}  />
-           
+         <Route exact path="/" render={()=>(
+
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='read')}
+                   shelf={this.state.selectedShelf}
+                   title='Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}} />
+          
+                                              )} /> 
+
+        <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='wantToRead')}
+                   shelf={this.state.selectedShelf}
+                   title='Want to Read'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}} />
+          
+                                          )} />
+
+                                          
+     <Route exact path="/" render={()=>(
+                   
+         <MyReads  books={this.state.books.filter(book=>book.shelf==='currentlyReading')}
+                   shelf={this.state.selectedShelf}
+                   title='Currently Reading'
+                  onUpdateShelf={(book,shelf)=>{
+                  this.updateShelf(book,shelf)}} />  
+                
+                                          )} />
+
+            </div>
+         </div>
          //end of the route (\) which include three component
                                  )} /> 
                
