@@ -13,6 +13,7 @@ class BooksApp extends React.Component {
   state = {
     books :[],
     selectedShelf: 'none',
+    searchResults: []
   }
 //life cycle event to get data from external source
 //it's going to return it as promise so we use (.then)
@@ -28,6 +29,7 @@ componentDidMount(){
 updateShelf=(book,shelf)=>{
 //console.log (book)
   this.setState({selectedShelf: shelf})
+ // this.setState((state,props){selectedShelf: shelf})
    if(book.shelf!== shelf){
       book.shelf = shelf
      BooksAPI.update(book, shelf).then((res)=>
@@ -50,9 +52,11 @@ searchShelf = (query) => {
       if(query.trim() !== '') {
         
        BooksAPI.search(query).then((res)=>
-       {this.setState(state=>({books:state.books.concat(res)}))}
        
-        ).catch(function(e){
+       {this.setState((state,props)=>({searchResults:state.searchResults.concat(res) })) }
+    //   {this.setState(state=>({books:state.books.concat(res)}))}
+       
+       ).catch(function(e){
             console.log('error',e)
           });
        }//end of if condition
@@ -70,7 +74,7 @@ var selectedShelf=['none','wantToRead','read','currentlyReading']
 
    <Route exact path="/" render={()=>(
       
-    <BookShelf    books={this.state.books} 
+    <BookShelf    books={this.state.books.concat((this.state.searchResults))} 
                   onUpdateShelf={this.updateShelf} 
                    selectedShelf={this.state.selectedShelf}  />
            
@@ -78,7 +82,7 @@ var selectedShelf=['none','wantToRead','read','currentlyReading']
                                  )} /> 
                
   <Route path="/search" render= {()=>(
-      <Search       books={this.state.books.filter(book=>book.shelf==='none')}
+      <Search       books={this.state.searchResults.filter(book=>book.shelf==='none')}
                     shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{
                       this.searchShelf(query)  }} 
