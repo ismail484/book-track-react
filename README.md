@@ -48,3 +48,4 @@ APP.js
    4. [React Form and select element](https://facebook.github.io/react/docs/forms.html)
    5. [Short-circuit evaluation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Short-circuit_evaluation)
     6. [React Router v4](https://tylermcginnis.com/build-your-own-react-router-v4/)
+    7. [Using a function in `setState` instead of an object](https://medium.com/@shopsifter/using-a-function-in-setstate-instead-of-an-object-1f5cfd6e55d1)
