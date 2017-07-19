@@ -34,7 +34,8 @@ const { rating } = this.state;
                                  </div> ) }
                       <div className="book-shelf-changer">
                               <select  value={book.shelf} selected
-                                       onChange={event=>onUpdateShelf(book,event.target.value)}> 
+                                       onChange={event=>onUpdateShelf(book,event.target.value)}
+                                       style={{color:'#00b200'}}> 
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
