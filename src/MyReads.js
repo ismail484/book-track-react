@@ -1,10 +1,6 @@
 import React ,{Component} from 'react'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import * as MyReadsAPI from './MyReads'
-import StarRatingComponent from 'react-star-rating-component';
 import Book from'./Book'
 
 
@@ -27,7 +23,6 @@ title:PropTypes.string.isRequired,
  render(){
 //destructuring
 const{books,onUpdateShelf,shelf,title}=this.props 
-const { rating } = this.state;
 
 
  return(

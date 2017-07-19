@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Search from'./Search'
@@ -12,7 +12,7 @@ class BooksApp extends React.Component {
   
   state = {
     books :[],
-    selectedShelf: 'none',
+    selectedShelf: '',
     searchResults: []
   }
 //life cycle event to get data from external source
@@ -34,9 +34,7 @@ updateShelf=(book,shelf)=>{
       book.shelf = shelf
      BooksAPI.update(book, shelf).then((res)=>
      
-     { this.setState((state,props) => { books: state.books.filter(b => b.id !== book.id).concat([ book ]) })}
-
-     // { this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))}
+     { this.setState((state,props) => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) } ) )}
      )
       }else{
       book=book
@@ -53,12 +51,13 @@ searchShelf = (query) => {
         
        BooksAPI.search(query).then((res)=>
        
-       {this.setState((state,props)=>({searchResults:state.searchResults.concat(res) })) }
-    //   {this.setState(state=>({books:state.books.concat(res)}))}
+       {this.setState((state,props)=>({searchResults:res })) 
+      console.log(res)}
        
        ).catch(function(e){
             console.log('error',e)
           });
+          console.log (this.state.searchResults)
        }//end of if condition
   
     }//end of search function   
@@ -67,21 +66,21 @@ searchShelf = (query) => {
 render() {
 
 //define shelf values
-var selectedShelf=['none','wantToRead','read','currentlyReading']
+//var selectedShelf=['none','wantToRead','read','currentlyReading']
    
   return (
       <div className="app">
 
    <Route exact path="/" render={()=>(
       
-    <BookShelf    books={this.state.books.concat((this.state.searchResults))} 
+    <BookShelf    books={this.state.books} 
                   onUpdateShelf={this.updateShelf} 
                    selectedShelf={this.state.selectedShelf}  />
            
          //end of the route (\) which include three component
                                  )} /> 
                
-  <Route path="/search" render= {()=>(
+  <Route path="/search" render={()=>(
       <Search       books={this.state.searchResults.filter(book=>book.shelf==='none')}
                     shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{

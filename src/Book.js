@@ -1,9 +1,5 @@
 import React ,{Component} from 'react'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import {Link} from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import * as MyReadsAPI from './MyReads'
 import StarRatingComponent from 'react-star-rating-component';
 
 
@@ -37,8 +33,8 @@ const { rating } = this.state;
                       backgroundImage:`url(${book.imageLinks.thumbnail })`   }}>
                                  </div> ) }
                       <div className="book-shelf-changer">
-                              <select  value= {book.shelf} selected
-                                       onChange= {event=>onUpdateShelf(book,event.target.value)}> 
+                              <select  value={book.shelf} selected
+                                       onChange={event=>onUpdateShelf(book,event.target.value)}> 
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
