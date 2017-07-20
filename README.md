@@ -14,12 +14,13 @@ APP.js
 └───BookShelf ( stateless function)
 │   │  
 │   └─── MyReads.js ( stateless function)
-│       
-└───Search.js 
-    │
-    └───  Book.js
-
-```
+│          │        
+│          └───  Book.js
+│     
+└───  Search.js   
+        │
+        └───  Book.js
+    ```  
 
 
 # Required Libraries and Dependencies
