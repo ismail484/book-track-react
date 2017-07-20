@@ -20,8 +20,8 @@ APP.js
 └───  Search.js   
         │
         └───  Book.js
-    ```  
-
+    
+ ``` 
 
 # Required Libraries and Dependencies
    - Create React App : run `npm install -g create-react-app`
