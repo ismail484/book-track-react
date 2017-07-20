@@ -11,9 +11,9 @@
 APP.js
 │     
 │
-└───BookShelf
+└───BookShelf (stateless function)
 │   │  
-│   └─── MyReads.js
+│   └─── MyReads.js (stateless function)
 │       
 └───Search.js 
     │
