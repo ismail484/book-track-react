@@ -10,7 +10,7 @@ import BookShelf from'./BookShelf'
 
 class BooksApp extends React.Component {
   
-  state = {
+  state ={
     books :[],
     selectedShelf: '',
     searchResults: []

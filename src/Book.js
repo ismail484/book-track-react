@@ -15,7 +15,7 @@ getBookShelf:PropTypes.func.isRequired,
 
 state={rating: 1}
 
-onStarClick(nextValue, prevValue, name) {
+onStarClick=(nextValue, prevValue, name)=> {
         this.setState({rating: nextValue});
                                         }
 
@@ -51,7 +51,7 @@ const { rating } = this.state;
                                                name={book.id}
                                                starCount={5}
                                                value={book.averageRating}
-                                               onStarClick={this.onStarClick.bind(this)}
+                                               onStarClick={this.onStarClick}
                                                   />
                             
                           </div>
