@@ -14,6 +14,7 @@ books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 shelf:PropTypes.string.isRequired,
 title:PropTypes.string.isRequired,
+getBookShelf:PropTypes.func.isRequired
                               };
  state={
         query: '' ,
@@ -22,7 +23,7 @@ title:PropTypes.string.isRequired,
 
  render(){
 //destructuring
-const{books,onUpdateShelf,shelf,title}=this.props 
+const{books,onUpdateShelf,shelf,title,getBookShelf}=this.props 
 
 
  return(
@@ -35,7 +36,7 @@ const{books,onUpdateShelf,shelf,title}=this.props
             <ol className="books-grid">
                 {   books.map((book,id)=>(
                  <li key={id}>
-                <Book book={book} onUpdateShelf={onUpdateShelf} shelf={shelf} />
+                <Book book={book} onUpdateShelf={onUpdateShelf} shelf={shelf} getBookShelf={getBookShelf} />
                    </li>
                     )//end of map Array
                     )//end of JSX expression

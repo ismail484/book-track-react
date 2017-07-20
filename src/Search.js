@@ -11,8 +11,8 @@ static propTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 onSearchShelf:PropTypes.func.isRequired,
-shelf:PropTypes.string.isRequired
-
+shelf:PropTypes.string.isRequired,
+getBookShelf:PropTypes.func.isRequired
     };
 
 state={
@@ -28,7 +28,7 @@ state={
 render(){
 
 //object destructuring
-const{books,onUpdateShelf,onSearchShelf,shelf}=this.props 
+const{books,onUpdateShelf,onSearchShelf,shelf,getBookShelf}=this.props 
 const{query} =this.state
 //to return the match patern
     let showingBooks
@@ -36,7 +36,7 @@ const{query} =this.state
 
         let match = new RegExp (escapeRegExp(query),'i')
         showingBooks= books.filter(book=>match.test(book.title)|| match.test(book.authors))
-
+        
     }else {
   showingBooks=[]
     }
@@ -57,7 +57,7 @@ const{query} =this.state
         <ol className="books-grid">
             {showingBooks.map((book,id)=>(
             <li key={id}>
-                <Book book={book} onUpdateShelf={onUpdateShelf} shelf={shelf} />
+                <Book book={book} onUpdateShelf={onUpdateShelf} shelf={shelf} getBookShelf={getBookShelf}/>
             </li>
             ))}
         </ol>

@@ -10,7 +10,7 @@ static propTypes={
 book: PropTypes.object.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 shelf:PropTypes.string.isRequired,
-
+getBookShelf:PropTypes.func.isRequired,
                               };
 
 state={rating: 1}
@@ -22,7 +22,7 @@ onStarClick(nextValue, prevValue, name) {
 
  render(){
 //destructuring
-const{onUpdateShelf,shelf,book}=this.props 
+const{onUpdateShelf,shelf,book,getBookShelf}=this.props 
 const { rating } = this.state;
 
  return(
@@ -33,7 +33,7 @@ const { rating } = this.state;
                       backgroundImage:`url(${book.imageLinks.thumbnail })`   }}>
                                  </div> ) }
                       <div className="book-shelf-changer">
-                              <select  value={book.shelf} selected
+                              <select  value={getBookShelf(book)} selected
                                        onChange={event=>onUpdateShelf(book,event.target.value)}
                                        style={{color:'#00b200'}}> 
                                 <option value="none" disabled>Move to...</option>

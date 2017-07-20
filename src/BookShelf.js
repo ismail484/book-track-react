@@ -13,12 +13,13 @@ static propTypes={
 books: PropTypes.array.isRequired ,
 onUpdateShelf:PropTypes.func.isRequired,
 selectedShelf:PropTypes.string.isRequired,
+getBookShelf:PropTypes.func.isRequired,
 
                               };
 
 render(){
 
-const{books,onUpdateShelf,selectedShelf}=this.props 
+const{books,onUpdateShelf,selectedShelf,getBookShelf}=this.props 
 
 
 return(
@@ -33,7 +34,8 @@ return(
   <MyReads  books={books.filter(book=>book.shelf==='read')}
                    shelf={selectedShelf}
                    title='Read'
-                  onUpdateShelf={onUpdateShelf} />
+                  onUpdateShelf={onUpdateShelf}
+                   getBookShelf={getBookShelf} />
           
                                            
 
@@ -42,7 +44,8 @@ return(
          <MyReads  books={books.filter(book=>book.shelf==='wantToRead')}
                    shelf={selectedShelf}
                    title='Want to Read'
-                   onUpdateShelf={onUpdateShelf} />
+                   onUpdateShelf={onUpdateShelf}
+                   getBookShelf={getBookShelf} />
           
                                       
 
@@ -52,7 +55,8 @@ return(
          <MyReads  books={books.filter(book=>book.shelf==='currentlyReading')}
                    shelf={selectedShelf}
                    title='Currently Reading'
-                 onUpdateShelf={onUpdateShelf} />  
+                 onUpdateShelf={onUpdateShelf} 
+                 getBookShelf={getBookShelf}/>  
                 
                                        
 

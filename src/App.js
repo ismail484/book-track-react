@@ -42,11 +42,21 @@ updateShelf=(book,shelf)=>{
 console.log(book)
 console.log(this.state.books)
  } 
-   
+   getBookShelf = (book) => {
+  // find a book in our state array that matches the provided book's
+  const existingBook = this.state.books.find(b => b.id == book.id)
+
+  // if a book is found, return the shelf name => 'read', 'currentlyReading', etc
+  if (existingBook) return existingBook.shelf
+
+  // no book found? return the shelf provided with the book
+  return book.shelf
+}
+
+
 //search for requered book
 searchShelf = (query) => {
     this.setState({query:query})
-     
       if(query.trim() !== '') {
         
        BooksAPI.search(query).then((res)=>
@@ -59,7 +69,7 @@ searchShelf = (query) => {
           });
           console.log (this.state.searchResults)
        }//end of if condition
-  
+ 
     }//end of search function   
 
 
@@ -75,18 +85,20 @@ render() {
       
     <BookShelf    books={this.state.books} 
                   onUpdateShelf={this.updateShelf} 
-                   selectedShelf={this.state.selectedShelf}  />
+                   selectedShelf={this.state.selectedShelf}
+                   getBookShelf={this.getBookShelf}  />
            
          //end of the route (\) which include three component
                                  )} /> 
                
   <Route path="/search" render={()=>(
-      <Search       books={this.state.searchResults.filter(book=>book.shelf==='none')}
+      <Search       books={this.state.searchResults}
                     shelf={this.state.selectedShelf}
                     onSearchShelf={(query)=>{
                       this.searchShelf(query)  }} 
                   onUpdateShelf={(book,shelf)=>{
-                  this.updateShelf(book,shelf)}}  />
+                  this.updateShelf(book,shelf)}}
+                  getBookShelf={this.getBookShelf}   />
 
     )} />
 
