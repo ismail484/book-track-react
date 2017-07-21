@@ -37,6 +37,7 @@ APP.js
    4.  Use the serach terms which are in `SEARCH_TERMS.md`
  
 # Miscellaneous
+  - ESlint rules are implemented .
   - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
 
 
