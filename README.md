@@ -3,7 +3,7 @@
 # Description
   
   ### First open [Book Track App](https://book-track-app.herokuapp.com/) to discover, how app works .
-  - Simply ,It acts as a single page application.
+  - Simply , It acts as a single page application.
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
   #### How  components do interact with each other:
@@ -40,6 +40,7 @@ APP.js
 # Miscellaneous
   - ESlint rules are implemented .
   - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
+  - Implement on Amazon AWS Cloud or on Github pages 
 
 
 
