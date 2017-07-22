@@ -2,7 +2,7 @@
 
 # Description
   
-  -First open [Book Track App](https://book-track-app.herokuapp.com/)to discover, how app works .
+  ### First open [Book Track App](https://book-track-app.herokuapp.com/) to discover, how app works .
   - Simply ,It acts as a single page application.
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
