@@ -52,13 +52,13 @@ class Book extends Component {
             <div className="book-title">{book.title}</div>
             <div className="book-authors">{book.authors}</div>
             <div className="book-rate" >
-              <StarRatingComponent
+              <div className="left"><StarRatingComponent
                 name={book.id}
                 starCount={5}
                 value={book.averageRating}
                 onStarClick={this.onStarClick}
-              />
-
+              /><div className="right">{book.ratingsCount}</div></div>
+              
             </div>
 
           </div>
