@@ -174,5 +174,13 @@ body, .app {
 }
 .book-rate{
 padding: 5px 5px;
+}
 
+.left{
+  float: left;
+}
+.right{
+
+  float: right;
+   padding:0 ;
 }
