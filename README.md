@@ -1,8 +1,9 @@
 # Project: book-track-react - [Mohamed Ismail]
 
 # Description
-   
-  - Simply ,It acts as a single page application.
+  
+  ### First open [Book Track App](https://book-track-app.herokuapp.com/) to discover, how app works .
+  - Simply , It acts as a single page application using ReactJs .
   - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
 
   #### How  components do interact with each other:
@@ -37,7 +38,9 @@ APP.js
    4.  Use the serach terms which are in `SEARCH_TERMS.md`
  
 # Miscellaneous
+  - ESlint rules are implemented .
   - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
+  - Implement on Amazon AWS Cloud or on Github pages 
 
 
 
@@ -50,3 +53,5 @@ APP.js
    5. [Short-circuit evaluation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Short-circuit_evaluation)
    6. [React Router v4](https://tylermcginnis.com/build-your-own-react-router-v4/)
    7. [Using a function in `setState` instead of an object](https://medium.com/@shopsifter/using-a-function-in-setstate-instead-of-an-object-1f5cfd6e55d1)
+   8. [Eslint Rules](http://eslint.org/)
+   9. [Heroku Cloud](https://devcenter.heroku.com/)
