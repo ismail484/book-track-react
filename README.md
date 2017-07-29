@@ -39,7 +39,6 @@ APP.js
  
 # Miscellaneous
   - ESlint rules are implemented .
-  - It's provided with API promises to update on backend [Udacity server](https://www.udacity.com/) .
   - Implement on Amazon AWS Cloud or on Github pages 
 
 
