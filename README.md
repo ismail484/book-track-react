@@ -4,7 +4,8 @@
   
   ### First open [Book Track App](https://book-track-app.herokuapp.com/) to discover, how app works .
   - Simply , It acts as a single page application using ReactJs .
-  - the web app allow the user to select and categorize books according to the reading state(want to read, currently reading, read).
+  - the wep App act as  a `Bookshelf App` that allows users to select and categorize books they have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that I used to persist information as you interact with the application.
+  
 
   #### How  components do interact with each other:
 
